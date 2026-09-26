@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include "modules.h"
+#include "led.hpp"
 #include "modules/wifi.hpp"
+#include "modules/bt.hpp"
 
-#define LED 2
 #define BTN 0
 
 bool prev = HIGH;
@@ -10,11 +11,14 @@ unsigned long last = 0;
 
 void setup() {
 	Serial.begin(115200);
-	pinMode(LED, OUTPUT);
+	ledInit();
 	pinMode(BTN, INPUT_PULLUP);
-#ifdef MOD_WIFI
-	wifiInit();
-#endif
+	#ifdef MOD_WIFI
+		wifiInit();
+	#endif
+	#ifdef MOD_BT
+		btInit();
+	#endif
 }
 
 void loop() {
@@ -27,7 +31,11 @@ void loop() {
 		}
 		prev = cur;
 	}
-#ifdef MOD_WIFI
-	wifiTick();
-#endif
+	ledTick();
+	#ifdef MOD_WIFI
+		wifiTick();
+	#endif
+	#ifdef MOD_BT
+		btTick();
+	#endif
 }

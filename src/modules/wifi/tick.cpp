@@ -13,6 +13,8 @@
 				snprintf(ssid, sizeof(ssid), "%s%d", MOD_WIFI_AP_SPAMMER_NAME, i);
 				wifiBeacon(ssid, i);
 			}
+			static bool up = false;
+			if (!up) { up = true;ledFlash(200); } // all aps live
 		#endif
 	}
 #endif

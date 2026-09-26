@@ -11,5 +11,6 @@
 		#ifdef MOD_WIFI_AP_SPAMMER
 			Serial.printf("beaconing %s0..%d\n", MOD_WIFI_AP_SPAMMER_NAME, MOD_WIFI_AP_SPAMMER_COUNT - 1);
 		#endif
+		ledFlash(200); // init done
 	}
 #endif
