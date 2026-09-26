@@ -1,0 +1,36 @@
+#include "wifi.hpp"
+
+#ifdef MOD_WIFI_AP_SPAMMER
+	#include <esp_wifi.h>
+	#include <cstring>
+
+	static uint8_t frame[] = {
+		0x80, 0x00, 0x00, 0x00, // beacon, no flags
+		0xff,0xff,0xff,0xff,0xff,0xff, // dst bcast
+		0x00,0x00,0x00,0x00,0x00,0x00, // src (bssid), patched
+		0x00,0x00,0x00,0x00,0x00,0x00, // bssid, patched
+		0x00,0x00, // seq
+		0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00, // timestamp
+		0x64,0x00, // beacon int
+		0x31,0x04, // caps
+		0x00,0x00, // ssid tag: id + len, patched
+	};
+	#define HDR sizeof(frame) // fixed params + ssid tag hdr
+	static const uint8_t tail[] = {
+		0x01,0x08,0x82,0x84,0x8b,0x96,0x24,0x30,0x48,0x6c, // rates
+		0x03,0x01,0x01, // channel 1
+	};
+
+	void wifiBeacon(const char* ssid, uint8_t idx) {
+		uint8_t pkt[128];
+		int n = HDR;
+		memcpy(pkt, frame, n);
+		uint8_t mac[6] = {0xde,0xad,0xbe,0xef,0x00,idx};
+		memcpy(pkt+10, mac, 6);memcpy(pkt+16, mac, 6);
+		uint8_t len = strlen(ssid);
+		pkt[HDR-1] = len; // ssid tag len (id already 0x00)
+		memcpy(pkt+n, ssid, len);n += len;
+		memcpy(pkt+n, tail, sizeof(tail));n += sizeof(tail);
+		esp_wifi_80211_tx(WIFI_IF_AP, pkt, n, true);
+	}
+#endif

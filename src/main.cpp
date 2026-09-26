@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "modules.h"
+#include "modules/wifi.hpp"
 
 #define LED 2
 #define BTN 0
@@ -10,6 +12,9 @@ void setup() {
 	Serial.begin(115200);
 	pinMode(LED, OUTPUT);
 	pinMode(BTN, INPUT_PULLUP);
+#ifdef MOD_WIFI
+	wifiInit();
+#endif
 }
 
 void loop() {
@@ -22,4 +27,7 @@ void loop() {
 		}
 		prev = cur;
 	}
+#ifdef MOD_WIFI
+	wifiTick();
+#endif
 }
