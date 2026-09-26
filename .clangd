@@ -1,0 +1,5 @@
+CompileFlags:
+  Remove: [-mlongcalls, -fstrict-volatile-bitfields, -fno-tree-switch-conversion, -mtext-section-literals, -fipa-pta, -freorder-blocks]
+  Add: [--target=xtensa, -Wno-unknown-warning-option]
+Diagnostics:
+  Suppress: [pp_including_mainfile_in_preamble]
