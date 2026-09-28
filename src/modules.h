@@ -2,7 +2,8 @@
 
 // --- MODULES ---
 // #define MOD_WIFI
-#define MOD_BT
+// #define MOD_BT
+#define MOD_OLED
 
 // --- MODULE/FUNCTIONS ---
 #ifdef MOD_WIFI
@@ -11,6 +12,11 @@
     #ifdef MOD_WIFI_AP_SPAMMER
         #define MOD_WIFI_AP_SPAMMER_COUNT 100
         #define MOD_WIFI_AP_SPAMMER_NAME "lubie-koty-"//+ index
+    #endif
+    // --- Captive Portal --- (disable AP_SPAMMER above, they share the radio)
+    // #define MOD_WIFI_PORTAL
+    #ifdef MOD_WIFI_PORTAL
+        #define MOD_WIFI_PORTAL_SSID "Free WiFi"
     #endif
 #endif
 
@@ -65,4 +71,14 @@
     #ifdef MOD_BT_KEYTOOTH
         // TODO (rewrite hx4c/keytooth)
     #endif
+#endif
+
+#ifdef MOD_OLED
+    // --- SSD1306 0.96" 128x64 I2C ---
+    #define MOD_OLED_VCC 13 // D13, panel powered off a gpio
+    #define MOD_OLED_SCL 12 // D12
+    #define MOD_OLED_SDA 14 // D14
+    #define MOD_OLED_ADDR 0x3c
+    #define MOD_OLED_W 128
+    #define MOD_OLED_H 64
 #endif

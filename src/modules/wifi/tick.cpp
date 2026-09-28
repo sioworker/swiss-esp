@@ -16,5 +16,8 @@
 			static bool up = false;
 			if (!up) { up = true;ledFlash(200); } // all aps live
 		#endif
+		#ifdef MOD_WIFI_PORTAL
+			portalTick();
+		#endif
 	}
 #endif

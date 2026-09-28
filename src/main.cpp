@@ -3,6 +3,7 @@
 #include "led.hpp"
 #include "modules/wifi.hpp"
 #include "modules/bt.hpp"
+#include "modules/oled.hpp"
 
 #define BTN 0
 
@@ -18,6 +19,9 @@ void setup() {
 	#endif
 	#ifdef MOD_BT
 		btInit();
+	#endif
+	#ifdef MOD_OLED
+		oledInit();
 	#endif
 }
 
@@ -37,5 +41,8 @@ void loop() {
 	#endif
 	#ifdef MOD_BT
 		btTick();
+	#endif
+	#ifdef MOD_OLED
+		oledTick();
 	#endif
 }
