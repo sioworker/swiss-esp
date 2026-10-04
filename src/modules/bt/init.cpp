@@ -13,6 +13,6 @@
 			esp_bd_addr_t a = {0xf0,0xed,0xc0,0xff,0xee,0x69}; // needs an addr set once in init
 			pAdv->setDeviceAddress(a, BLE_ADDR_TYPE_RANDOM);
 		#endif
-		ledFlash(200); // init done
+		led.flash(200); // init done
 	}
 #endif

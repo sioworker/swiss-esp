@@ -6,6 +6,6 @@
 	void oledInit() {
 		if (!oledBegin()) { Serial.println("oled not found"); return; }
 		oledShow("swiss-esp", "booting...");
-		ledFlash(200); // init done
+		led.flash(200); // init done
 	}
 #endif

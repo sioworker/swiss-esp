@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <cstddef>
 #include "../modules.h"
-#include "../led.hpp"
+#include "../util.hpp"
 
 #ifdef MOD_BT
 	#include "bt/init.hpp"

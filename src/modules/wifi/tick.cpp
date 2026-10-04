@@ -14,7 +14,7 @@
 				wifiBeacon(ssid, i);
 			}
 			static bool up = false;
-			if (!up) { up = true;ledFlash(200); } // all aps live
+			if (!up) { up = true;led.flash(200); } // all aps live
 		#endif
 		#ifdef MOD_WIFI_PORTAL
 			portalTick();

@@ -16,6 +16,6 @@
 		#ifdef MOD_WIFI_PORTAL
 			portalInit();
 		#endif
-		ledFlash(200); // init done
+		led.flash(200); // init done
 	}
 #endif

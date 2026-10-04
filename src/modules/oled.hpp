@@ -1,6 +1,6 @@
 #pragma once
 #include "../modules.h"
-#include "../led.hpp"
+#include "../util.hpp"
 
 #ifdef MOD_OLED
 	#include "oled/init.hpp"

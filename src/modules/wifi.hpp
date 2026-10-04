@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../modules.h"
-#include "../led.hpp"
+#include "../util.hpp"
 
 #ifdef MOD_WIFI
 	#if defined(MOD_WIFI_AP_SPAMMER) && defined(MOD_WIFI_PORTAL)

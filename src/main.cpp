@@ -1,19 +1,14 @@
 #include <Arduino.h>
 #include "modules.h"
-#include "led.hpp"
+#include "util.hpp"
 #include "modules/wifi.hpp"
 #include "modules/bt.hpp"
 #include "modules/oled.hpp"
 
-#define BTN 0
-
-bool prev = HIGH;
-unsigned long last = 0;
-
 void setup() {
 	Serial.begin(115200);
-	ledInit();
-	pinMode(BTN, INPUT_PULLUP);
+	led.init();
+	Button.init();
 	#ifdef MOD_WIFI
 		wifiInit();
 	#endif
@@ -26,16 +21,8 @@ void setup() {
 }
 
 void loop() {
-	bool cur = digitalRead(BTN);
-	if (cur != prev && millis() - last > 50) {
-		last = millis();
-		if (cur == LOW) {
-			digitalWrite(LED, !digitalRead(LED));
-			Serial.println("boot pressed");
-		}
-		prev = cur;
-	}
-	ledTick();
+	Button.tick();
+	led.tick();
 	#ifdef MOD_WIFI
 		wifiTick();
 	#endif
